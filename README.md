@@ -1,30 +1,27 @@
 # setting_startup
 Linuxでアプリを自動起動するための設定
 
+start.sh
 ```sh
-echo start
+#!/bin/sh
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+cd `dirname $0`
 
-if [ $# -ne 2]; then
-  echo "引数が足りません" 1>&2
-  echo "引数1:アプリ名" 1>&2
-  echo "引数2:起動スクリプト" 1>2
-  exit 1
-fi
+node index.js
+```
 
-# アプリ名.serviceを作成
-sudo cat << EOS > /etc/systemd/system/${1}.service
+myapi.service
+```sh
 [Unit]
-Description = ${1}
+Description = myapi
 
 [Service]
-ExecStart=${2}
+ExecStart=/home/fancl01/myapi/start.sh
 Restart=always
 Type=simple
-User=`whoami`
+User=fancl01
 
 [Install]
 WantedBy=multi-user.target
-EOS
-
-echo end
 ```
