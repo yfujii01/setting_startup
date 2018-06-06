@@ -1,0 +1,2 @@
+# setting_startup
+Linuxでアプリを自動起動するための設定
