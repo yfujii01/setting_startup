@@ -3,12 +3,12 @@ Linuxでアプリを自動起動するための設定
 
 start.sh
 ```sh
-#!/bin/sh
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
-cd `dirname $0`
+#!/bin/bash
 
-node index.js
+source ~/.bashrc
+
+cd `dirname $0`
+unicorn -c unicorn.conf
 ```
 
 myapi.service
